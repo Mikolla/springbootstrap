@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>User page</title>
+</head>
+<body>
+
+
+<div>
+
+    <div>
+        <div>
+            <p th:text="'Hello, ' + ${user} + '!'" />
+            <label th:inline="text">You are authorized as, [[${user}]]!</label>
+        </div>
+
+     <!--   <p th:inline="text">Current user name =  [[${#httpServletRequest.remoteUser}]]!</p> -->
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="logout"/>
+        </form>
+
+    </div>
+
+</div>
+
+        <!--    <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+            </span> -->
+
+</body>
+</html>
