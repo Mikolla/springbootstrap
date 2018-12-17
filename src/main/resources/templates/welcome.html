@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Spring Security Example </title>
     <div th:replace="fragments/header :: header-css"/>
@@ -9,31 +10,57 @@
 
 <div th:replace="fragments/header :: header"/>
 
-<div class="container-fluid">
-    <div class="col-sm-2">
+
+
+<div class="row">
+    <div class="col-md-2">
         <nav class="nav-sidebar  nav-justified">
             <ul class="nav nav-pills nav-stacked">
-                <li class=""><a href="/admin" data-toggle="tab">Admin</a></li>
-                <li class="active"><a href="/user" data-toggle="tab">User</a></li>
+                <li class="active"><a href="/admin" data-toggle="tab">Admin</a></li>
+                <li class=""><a href="/user" data-toggle="tab">User</a></li>
             </ul>
         </nav>
     </div>
-    <div class="col-10">
-        <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
-            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+    <div class="col-md-10">
+        <h1>Admin panel</h1>
+<br/>
+        <div class="container-fluid">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr class="active">
+                <td align="left">ID</td>
+                <td align="left">Login</td>
+                <td align="left">Name</td>
+                <td align="left">Password</td>
+                <td align="left">Role</td>
+                <td align="left">Actions</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}">id</td>
+                <td th:text="${user.login}">name</td>
+                <td th:text="${user.name}">login</td>
+                <td th:text="${user.password}">login</td>
+                <td th:text="${user.getRoles().toArray()[0].getRoleName()}">login</td>
+                <td>
+                    <div class="btn-group">
+                        <a th:href="'/admin/edit/'+ ${user.id}"><button type="button" class="btn btn-primary">Edit</button></a>
+                        <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         </div>
+
     </div>
-    <!-- tab content -->
-
-
-
-
-
 </div>
 
+<!-- tab content -->
+
+
+<br/>
 <div th:replace="fragments/footer :: footer"/>
 
 </body>

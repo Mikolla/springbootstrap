@@ -32,7 +32,11 @@ public class HomeController {
 	private RoleService roleService;
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
-	public String getWelcome(){
+	public String getWelcome(ModelMap modelMap) {
+		modelMap.addAttribute("adminRole", new Role("Admin"));
+		modelMap.addAttribute("userRole", new Role("User"));
+		modelMap.addAttribute("adminName", getPrincipal());
+		modelMap.addAttribute("users", userService.getAllUsers());
 		return "welcome";
 	}
 

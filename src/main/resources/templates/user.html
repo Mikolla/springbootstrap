@@ -1,37 +1,37 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>User page</title>
+    <title>Spring Security Example </title>
     <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
 <div th:replace="fragments/header :: header"/>
 
-<div>
 
-    <div>
-        <div>
-            <p th:text="'Hello, ' + ${user} + '!'" />
-            <label th:inline="text">You are authorized as, [[${user}]]!</label>
+
+        <div class="row">
+            <div class="col-sm-2">
+                <nav class="nav-sidebar  nav-justified">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li class=""><a href="/admin" data-toggle="tab">Admin</a></li>
+                        <li class="active"><a href="/user" data-toggle="tab">User</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-sm-10">
+                <h1>User page</h1>
+                <p th:text="'Hello, ' + ${user} + '!'" />
+            </div>
         </div>
 
-     <!--   <p th:inline="text">Current user name =  [[${#httpServletRequest.remoteUser}]]!</p> -->
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="logout"/>
-        </form>
+        <!-- tab content -->
 
-    </div>
 
-</div>
-
-        <!--    <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/logout}">Sign Out</a>
-            </span> -->
+<br/>
+<div th:replace="fragments/footer :: footer"/>
 
 </body>
 </html>
