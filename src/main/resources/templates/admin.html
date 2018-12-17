@@ -1,32 +1,172 @@
-<!DOCTYPE HTML>
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <head>
-    <title>Admin page</title>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
 </head>
 <body>
 
-<div>
-    <div>
-        <p th:text="'Hello, ' + ${adminName} + '!'" />
-        <label th:inline="text">You are authorized as, [[${adminName}]]!</label>
+<div th:replace="fragments/header :: header"/>
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-2">
+        <nav class="nav-sidebar  nav-justified">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/admin" data-toggle="tab">Admin</a></li>
+                <li class=""><a href="/user" data-toggle="tab">User</a></li>
+            </ul>
+        </nav>
     </div>
+    <div class="col-md-10">
+        <h1>Admin panel</h1>
+        <br/>
 
-   <!-- <p th:inline="text">Current user name =  [[${#httpServletRequest.remoteUser}]]!</p> -->
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="logout"/>
-    </form>
 
+
+
+
+
+
+
+
+
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- tabs -->
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#one" data-toggle="tab">Users table</a></li>
+                        <li><a href="#two" data-toggle="tab">New User</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="one">
+                            <h4>&nbsp;&nbsp;&nbsp;&nbsp;All users</h4>
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                <tr class="active">
+                                    <td align="left">ID</td>
+                                    <td align="left">Login</td>
+                                    <td align="left">Name</td>
+                                    <td align="left">Password</td>
+                                    <td align="left">Role</td>
+                                    <td align="left">Actions</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="user : ${users}">
+                                    <td th:text="${user.id}">id</td>
+                                    <td th:text="${user.login}">name</td>
+                                    <td th:text="${user.name}">login</td>
+                                    <td th:text="${user.password}">login</td>
+                                    <td th:text="${user.getRoles().toArray()[0].getRoleName()}">login</td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a th:href="'/admin/edit/'+ ${user.id}"><button type="button" class="btn btn-primary">Edit</button></a>
+                                            <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <div class="tab-pane" id="two">
+                            <div>
+                                <label>ADDING FORM</label>
+                                <br/>
+
+                                <div th:if="${param.error}">
+                                    <div>
+                                        <p>All fields must be filled.</p>
+                                    </div>
+                                </div>
+                                <form th:action="@{/admin/add}" method="post">
+                                    <div>
+                                        <label>Name</label>
+                                    </div>
+                                    <div>
+                                        <input  type="text" name="name" required="true"/>
+                                    </div>
+
+                                    <div>
+                                        <label>Login</label>
+                                    </div>
+                                    <div>
+                                        <input  type="text" name="login" required="true"/>
+                                    </div>
+
+                                    <div>
+                                        <label>Password</label>
+                                    </div>
+                                    <div>
+                                        <input  type="text" name="password" required="true"/>
+                                    </div>
+
+                                    <div>
+                                        <label>Role</label>
+                                    </div>
+                                    <div>
+                                        <select  name="role">
+                                            <option></option>
+                                            <option>User</option>
+                                            <option>Admin</option>
+                                        </select>
+                                    </div>
+                                    <br/>
+                                    <div>
+                                        <input  type="submit" value="Add"/>
+                                        <a  href="/admin">Back</a>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
 </div>
 
-<div align="center">
+<!-- tab content -->
 
 
-    <div align="right">
-        <h3><a  href="/admin/add">Add user</a> </h3>
-    </div>
-</div>
+<br/>
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>
+
 
 <!--
 <span sec:authorize="isAuthenticated()">
@@ -63,33 +203,3 @@
 </div> -->
 
 
-<table border="1" cellpadding="5">
-    <thead>
-    <tr>
-        <td align="center">ID</td>
-        <td align="center">Login</td>
-        <td align="center">Name</td>
-        <td align="center">Password</td>
-        <td align="center">Role</td>
-        <td align="center">Actions</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user : ${users}">
-        <td th:text="${user.id}">id</td>
-        <td th:text="${user.login}">name</td>
-        <td th:text="${user.name}">login</td>
-        <td th:text="${user.password}">login</td>
-        <td th:text="${user.getRoles().toArray()[0].getRoleName()}">login</td>
-        <td>
-            <a th:href="'/admin/edit/'+ ${user.id}">Edit</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a th:href="'/admin/delete/' + ${user.id}">Delete</a>
-        </td>
-    </tr>
-    </tbody>
-</table>
-
-
-</body>
-</html>
