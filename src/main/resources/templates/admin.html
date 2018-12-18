@@ -1,12 +1,11 @@
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <head>
     <title>Spring Security Example </title>
     <div th:replace="fragments/header :: header-css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 <body>
 
@@ -24,7 +23,7 @@
         <nav class="nav-sidebar  nav-justified">
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="/admin">Admin</a></li>
-                <li class=""><a href="/user">User</a></li>
+                <li class=""><a href="/user" >User</a></li>
             </ul>
         </nav>
     </div>
@@ -76,7 +75,94 @@
                                         <div class="btn-group">
                                             <a th:href="'/admin/edit/'+ ${user.id}"><button type="button" class="btn btn-primary">Edit</button></a>
                                             <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">ED</button>
+                                            <p th:text="${user.id} + ' ' + ${user.login} + ' ' + ${user.password}" ></p>
                                         </div>
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">User edit</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+
+                                                        <label>EDIT FORM</label>
+                                                        <br/>
+                                                        <p th:text="${user.id} + ' ' + ${user.login} + ' ' + ${user.password}" ></p>
+                                                        <br/>
+                                                        <div th:if="${param.error}">
+                                                            <div>
+                                                                <p>All fields must be filled.</p>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <form th:action="@{/admin/edit}" method="post">
+
+
+                                                            <div>
+                                                                <label>Name</label>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" name="name" th:value="${user.name}" required="true"/>
+                                                            </div>
+                                                            <div>
+                                                                <label>Login</label>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" name="login" th:value="${user.login}" required="true"/>
+                                                            </div>
+                                                            <div>
+                                                                <label>Password</label>
+                                                            </div>
+                                                            <div>
+                                                                <input type="text" name="password" th:value="${user.password}" required="true"/>
+                                                            </div>
+                                                            <div>
+                                                                <label>Role</label>
+                                                            </div>
+                                                            <div>
+                                                                <select  name="role">
+                                                                    <option></option>
+                                                                    <option>User</option>
+                                                                    <option>Admin</option>
+                                                                </select>
+                                                            </div>
+
+
+                                                            <div>
+                                                                <div>
+                                                                    <input type="submit"  value="save"/>
+                                                                    <input type="hidden" name="id" th:value="${user.id}"/>
+                                                                    <a href="/admin">Back</a>
+                                                                </div>
+                                                                <div>
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+
+
+
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal -->
+
+
                                     </td>
                                 </tr>
                                 </tbody>
@@ -158,6 +244,13 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
 <!-- tab content -->
 
 
@@ -166,40 +259,3 @@
 
 </body>
 </html>
-
-
-<!--
-<span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/logout}">Sign Out</a>
-            </span>
-
-
-<div sec:authorize="isAuthenticated()">
-    This content is only shown to authenticated users.
-</div>
-<div sec:authorize="hasRole('Admin')">
-    This content is only shown to administrators.
-</div>
-<div sec:authorize="hasRole('User')">
-    This content is only shown to users.
-</div>
-
-<div th:text="${#authentication.name}">
-    The value of the "name" property of the authentication object should appear here.
-</div>
-
-<div th:if="${#authorization.expression('hasRole(''Admin'')')}">
-    This will only be displayed if authenticated user has role ROLE_ADMIN.
-</div>
-
-<div sec:authorize="${hasRole(#vars.expectedRole)}">
-    This will only be displayed if authenticated user has a role computed by the controller.
-</div>
-
-<div sec:authorize-url="/admin">
-    This will only be displayed if authenticated user can call the "/admin" URL.
-</div> -->
-
-
