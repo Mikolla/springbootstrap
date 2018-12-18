@@ -10,19 +10,3 @@ footer{
     margin-top:60px;
 }
 
-.no-margin {margin: 0 !important}
-
-.no-padding {
-	padding-right: 0; !important
-	padding-left: 0; !important
-}
-
-.no-margin1 {
-	margin-left:0;
-	margin-right:0;
-}
-
-.no-gutter > [class*='col-'] {
-	padding-right:0;
-	padding-left:0;
-}
