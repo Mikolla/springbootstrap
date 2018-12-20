@@ -125,11 +125,11 @@ public class HomeController {
 
 
 	@RequestMapping(value = { "/admin/edit" }, method = RequestMethod.POST)
-	public String updateUser(@RequestParam(value = "id") Long id,
-							 @RequestParam(value = "name") String name,
-							 @RequestParam(value = "login") String login,
-							 @RequestParam(value = "password") String password,
-							 @RequestParam(value = "role") Set<Role> roles) {
+	public String updateUser(@RequestParam(value = "id0") String id,
+							 @RequestParam(value = "Login1") String login,
+							 @RequestParam(value = "Name2") String name,
+							 @RequestParam(value = "Password3") String password,
+							 @RequestParam(value = "Role4") Set<Role> roles) {
 		if (roles.size() == 0) {
 			return "redirect:/admin/edit/" + id.toString() + "?error";
 		} else if (password.equals("")) {
@@ -147,7 +147,8 @@ public class HomeController {
 
 			}
 		}
-		User user = new User(id, name, login, password, roleSet);
+		long iD = Long.parseLong(id);
+		User user = new User(iD, name, login, password, roleSet);
 
 		userService.editUser(user);
 		return "redirect:/admin";

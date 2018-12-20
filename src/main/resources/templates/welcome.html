@@ -53,15 +53,18 @@
                         <div class="tab-content">
                             <div class="tab-pane active" id="one">
                                 <h4>&nbsp;&nbsp;&nbsp;&nbsp;All users</h4>
-                                <table class="table table-bordered table-hover">
+
+
+                                <table class="table table-bordered table-striped">
                                     <thead>
                                     <tr class="active">
-                                        <td align="left">ID</td>
-                                        <td align="left">Login</td>
-                                        <td align="left">Name</td>
-                                        <td align="left">Password</td>
-                                        <td align="left">Role</td>
-                                        <td align="left">Actions</td>
+                                        <th class="">id</th>
+                                        <th class="">Login</th>
+                                        <th class="">Name</th>
+
+                                        <th class="">Password</th>
+                                        <th class="">Role</th>
+                                        <th class="">Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -71,102 +74,16 @@
                                         <td th:text="${user.name}">login</td>
                                         <td th:text="${user.password}">login</td>
                                         <td th:text="${user.getRoles().toArray()[0].getRoleName()}">login</td>
-                                        <td>
-                                            <div  th:with="LOG=${user.login},PAS=${user.password}" class="btn-group">
-                                                <a th:href="'/admin/edit/'+ ${user.id}"><button type="button" class="btn btn-primary">Edit</button></a>
-                                                <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
-                                                <!-- Button trigger modal -->
-                                                <p th:with="LOG=${user.login},PAS=${user.password}"></p>
-                                                <a th:with="LOG=${'ty'},PAS=${'ty'}"><button   type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">ED</button></a>
-                                                <p th:text="${user.id} + ' ' + ${user.login} + ' ' + ${user.password}" ></p>
-
-
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                                <h4 class="modal-title" id="myModalLabel">User edit</h4>
-                                                            </div>
-                                                            <div class="modal-body">
-
-
-                                                          <!--      <label>EDIT FORM</label>
-                                                                <br/>
-
-                                                                <div th:if="${param.error}">
-                                                                    <div>
-                                                                        <p>All fields must be filled.</p>
-                                                                    </div>
-                                                                </div>
-
-
-                                                                <form th:action="@{/admin/edit}" method="post">
-
-
-                                                                    <div>
-                                                                        <label>Name</label>
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="text" name="name" th:value="${user.name}" required="true"/>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>Login</label>
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="text" name="login" th:value="${LOG}" required="true"/>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>Password</label>
-                                                                    </div>
-                                                                    <div>
-                                                                        <input type="text" name="password" th:value="${PAS}" required="true"/>
-                                                                    </div>
-                                                                    <div>
-                                                                        <label>Role</label>
-                                                                    </div>
-                                                                    <div>
-                                                                        <select  name="role">
-                                                                            <option></option>
-                                                                            <option>User</option>
-                                                                            <option>Admin</option>
-                                                                        </select>
-                                                                    </div>
-
-
-                                                                    <div>
-                                                                        <div>
-                                                                            <input type="submit"  value="save"/>
-                                                                            <input type="hidden" name="id" th:value="${user.id}"/>
-                                                                            <a href="/admin">Back</a>
-                                                                        </div>
-                                                                        <div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </form>   -->
-
-                                                                <iframe src="'http://localhost:8080/admin/edit/1'" id="info" class="iframe" name="info" seamless="" height="100%" width="100%"></iframe>
-
-
-
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Save</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- Modal -->
-
-
-                                            </div>
+                                        <td style="text-align:center;">
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#myModal" contenteditable="false">Edit</button>
+                                            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
+                                            <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
+
+
 
 
                             </div>
@@ -245,13 +162,64 @@
 </div>
 
 
-
-
-
-
-
-
 <!-- tab content -->
+
+
+
+
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".btn[data-target='#myModal']").click(function() {
+        var columnHeadings = $("thead th").map(function() {
+            return $(this).text();
+        }).get();
+        columnHeadings.pop();
+        var columnValues = $(this).parent().siblings().map(function() {
+            return $(this).text();
+        }).get();
+        var modalBody = $('<div id="modalContent"></div>');
+        var modalForm = $('<form role="form" name="modalForm" action="/admin/edit" method="post" ></form>');
+        $.each(columnHeadings, function(i, columnHeader) {
+            var formGroup = $('<div class="form-group"></div>');
+            formGroup.append('<label for="'+columnHeader+'">'+columnHeader+'</label>');
+            formGroup.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
+            modalForm.append(formGroup);
+        });
+        modalBody.append(modalForm);
+        $('.modal-body').html(modalBody);
+    });
+    $('.modal-footer .btn-primary').click(function() {
+        $('form[name="modalForm"]').submit();
+    });
+</script>
 
 
 <br/>
