@@ -227,7 +227,14 @@
             formGroup.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
             modalForm.append(formGroup);
         });
+
+        var idForm = $('<div class="form-group"></div>');
+        idForm.append('<label for="'+columnHeadings[0]+'">"laba"</label>');
+        idForm.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
+        modalForm.append(idForm);
+
         modalBody.append(modalForm);
+
         $('.modal-body').html(modalBody);
 
 
