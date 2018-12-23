@@ -88,7 +88,8 @@
 
                             </div>
                             <div class="tab-pane" id="two">
-                                <div>
+                                <div class="container-fluid">
+
                                     <label>ADDING FORM</label>
                                     <br/>
 
@@ -97,7 +98,32 @@
                                             <p>All fields must be filled.</p>
                                         </div>
                                     </div>
+
+
+
+                                    <div class="col-md-6"  style="float:inherit">
+
+
+
+                                        <form role="form" name="modalForm" th:action="@{/admin/add}" method="post">
+                                            <div class="form-group">
+
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" name="username" id="username" class="form-control"
+                                                       placeholder="UserName" required="true" autofocus="true"/>
+                                                <label for="role" style="margin-top: 5%">role</label>
+                                                <select class="form-control" name="role" id="role">
+                                                    <option value="Admin">Admin</option>
+                                                    <option value="User">User</option>
+                                                </select>
+                                            </div>
+                                        </form>
+
+
+
                                     <form th:action="@{/admin/add}" method="post">
+
                                         <div>
                                             <label>Name</label>
                                         </div>
@@ -136,6 +162,7 @@
                                         </div>
 
                                     </form>
+                                    </div>
                                 </div>
                             </div>
                             </div>
@@ -177,7 +204,7 @@
     </div>
     <div class="modal-dialog">
         <div class="modal-content">
-            <p>'od100 modal content'</p>
+
         </div>
     </div>
     <div class="modal-dialog">
@@ -190,7 +217,14 @@
 
             </div>
             <div class="modal-body">
-                <p>'od100 modal body'</p>
+                <div class="container-fluid">
+                    <center>
+
+                    <div class="1234 col-md-6"  style="float:inherit">
+                    </div>
+
+                    </center>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -202,40 +236,68 @@
 
 <script>
     $(".btn[data-target='#myModal']").click(function() {
+        // Get array of column Headings
         var columnHeadings = $("thead th").map(function() {
             return $(this).text();
         }).get();
+        // Remove the last column heading (for the Edit button)
         columnHeadings.pop();
+        // Get array of column values from the row where the Edit button was clicked
         var columnValues = $(this).parent().siblings().map(function() {
             return $(this).text();
         }).get();
         var id100 = columnValues[0];
         var login100 = columnValues[1];
         var name100 = columnValues[2];
-        var pasword100 = columnValues[3];
+        var password100 = columnValues[3];
         var role100 = columnValues[4];
         console.log('id = ' + id100);
         console.log('login = ' + login100);
         console.log('name = ' + name100);
-        console.log('password = ' + pasword100);
+        console.log('password = ' + password100);
         console.log('role = ' + role100);
         var modalBody = $('<div id="modalContent"></div>');
         var modalForm = $('<form role="form" name="modalForm" action="/admin/edit" method="post" ></form>');
-        $.each(columnHeadings, function(i, columnHeader) {
-            var formGroup = $('<div class="form-group"></div>');
-            formGroup.append('<label for="'+columnHeader+'">'+columnHeader+'</label>');
-            formGroup.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
-            modalForm.append(formGroup);
-        });
+
 
         var idForm = $('<div class="form-group"></div>');
-        idForm.append('<label for="'+columnHeadings[0]+'">"laba"</label>');
-        idForm.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
-        modalForm.append(idForm);
+
+        idForm.append('<label for="id" style="margin-top: 5%">id</label>');
+        idForm.append('<input class="form-control" disabled="disabled" name="id" id="id" value="'+id100+'" />');
+
+        idForm.append('<label for="'+columnHeadings[1]+'" style="margin-top: 5%">login</label>');
+        idForm.append('<input class="form-control" name="login" id="login" value="'+login100+'" />');
+
+        idForm.append('<label for="'+columnHeadings[2]+'" style="margin-top: 5%">name</label>');
+        idForm.append('<input class="form-control" name="name" id="name" value="'+name100+'" />');
+
+        idForm.append('<label for="'+columnHeadings[3]+'" style="margin-top: 5%">password</label>');
+        idForm.append('<input class="form-control" name="password" id="password" value="'+password100+'" />');
+
+      //  idForm.append('<label for="'+columnHeadings[3]+'">role</label>');
+      //  idForm.append('<input class="form-control" name="role" id="role" value="'+role100+'" />');
+
+
+
+        var sel = $('<select class="form-control" name="role" id="role"></select>');
+        if (role100 == 'Admin') {
+            sel.append('<option value="Admin">Admin</option>');
+            sel.append('<option value="User">User</option>');
+        } else {
+            sel.append('<option value="User">User</option>');
+            sel.append('<option value="Admin">Admin</option>');
+        }
+
+
+        idForm.append('<label for="role" style="margin-top: 5%">role</label>')
+        idForm.append(sel);
+
+
+       modalForm.append(idForm);
 
         modalBody.append(modalForm);
 
-        $('.modal-body').html(modalBody);
+        $('.1234').html(modalBody);
 
 
     });
