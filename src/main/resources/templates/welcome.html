@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header :: header" style="margin-bottom: 0px"/>
 
 
 
@@ -19,41 +19,37 @@
 
 
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2" style="margin-top: 20px; padding-right: 0px">
         <nav class="nav-sidebar  nav-justified">
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="/admin">Admin</a></li>
+                <li class="active"><a href="/admin" style="border-radius: 0;">Admin</a></li>
                 <li class=""><a href="/user" >User</a></li>
             </ul>
         </nav>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10" style="background: #f9f9f9; padding-right: 40px">
         <h1>Admin panel</h1>
 <br/>
 
 
 
-
-
-
-
-
-
-
-
-        <div class="container-fluid">
-            <div class="row">
-
                     <!-- tabs -->
-                    <div class="tabbable">
+
+
+
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#one" data-toggle="tab">Users table</a></li>
                             <li><a href="#two" data-toggle="tab">New User</a></li>
                         </ul>
-                        <div class="tab-content">
+
+
+
+
+                        <div class="tab-content" style="border-bottom-style: solid; border-left-style: solid; border-right-style: solid; border-radius: 0 0 5px 5px;
+                                       border-width: 0.5px; border-color: lightgray;">
                             <div class="tab-pane active" id="one">
-                                <div class="panel-heading">
-                                    <h4 class="modal-title" >All users</h4>
+                                <div class="panel-heading" style="background: #f9f9f9;">
+                                    <h4 class="modal-title">All users</h4>
                                 </div>
 
 
@@ -89,11 +85,11 @@
 
 
                             </div>
-                            <div class="tab-pane" id="two">
-                                <div class="panel-heading">
+                            <div class="tab-pane" id="two" style="border-radius: 0 0 5px 5px;">
+                                <div class="panel-heading" style="background: #f9f9f9;">
                                     <h4 class="modal-title" >Add new user</h4>
                                 </div>
-                                <div class="container-fluid">
+                                <div class="container-fluid" style="background: white; border-radius: 0 0 5px 5px;">
                                     <center>
                                     <div class="col-md-4"  style="float:inherit">
 
@@ -114,7 +110,7 @@
                                                     <option value="User">User</option>
                                                     <option value="Admin">Admin</option>
                                                 </select>
-                                                <input type="submit" value="Add new user" class="btn btn-success"></input>
+                                                <input type="submit" value="Add new user" class="btn btn-success" style="margin-top: 20px; margin-bottom: 10px;"></input>
                                             </div>
                                         </form>
                                     </div>
@@ -122,10 +118,10 @@
                                 </div>
                             </div>
                             </div>
-                    </div>
 
-            </div>
-        </div>
+
+
+
 
 
 
