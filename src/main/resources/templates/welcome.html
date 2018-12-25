@@ -46,23 +46,23 @@
 
 
                         <div class="tab-content" style="border-bottom-style: solid; border-left-style: solid; border-right-style: solid; border-radius: 0 0 5px 5px;
-                                       border-width: 0.5px; border-color: lightgray;">
+                                       border-width: 1.5px; border-color: lightgray;">
                             <div class="tab-pane active" id="one">
                                 <div class="panel-heading" style="background: #f9f9f9;">
                                     <h4 class="modal-title">All users</h4>
                                 </div>
 
-
-                                <table class="table table-bordered table-striped">
+                                <div class="table" style="padding-left: 15px; padding-right: 15px;">
+                                    <table class="table table-striped">
                                     <thead>
-                                    <tr class="active">
-                                        <th class="">id</th>
-                                        <th class="">Login</th>
-                                        <th class="">Name</th>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>Login</th>
+                                        <th>Name</th>
 
-                                        <th class="">Password</th>
-                                        <th class="">Role</th>
-                                        <th class="">Actions</th>
+                                        <th>Password</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -72,7 +72,7 @@
                                         <td th:text="${user.name}">login</td>
                                         <td th:text="${user.password}">login</td>
                                         <td th:text="${user.getRoles().toArray()[0].getRoleName()}">login</td>
-                                        <td style="text-align:center;">
+                                        <td>
                                         <!--    <button class="btn btn-success" data-toggle="modal" data-target="#myModal" contenteditable="false">Edit</button>  -->
                                             <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
                                             <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
@@ -80,6 +80,14 @@
                                     </tr>
                                     </tbody>
                                 </table>
+
+
+
+
+
+
+                                </div>
+
 
 
 
