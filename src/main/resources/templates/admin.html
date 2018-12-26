@@ -223,7 +223,10 @@
         var idForm = $('<div class="form-group"></div>');
 
         idForm.append('<label for="id" style="margin-top: 5%">id</label>');
-        idForm.append('<input class="form-control" disabled="disabled" name="id" id="id" value="'+id100+'" />');
+        idForm.append('<input class="form-control"  disabled="disabled"  name="id" id="id" value="'+id100+'" />');
+
+        idForm.append('<input class="form-control"  type="hidden"  name="id" id="id" value="'+id100+'" />');
+
 
         idForm.append('<label for="'+columnHeadings[1]+'" style="margin-top: 5%">login</label>');
         idForm.append('<input class="form-control" name="login" id="login" value="'+login100+'" />');

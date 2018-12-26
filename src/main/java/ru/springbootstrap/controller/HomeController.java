@@ -154,6 +154,36 @@ public class HomeController {
 		return "redirect:/admin";
 	}
 
+
+/*	@RequestMapping(value = { "/admin/edit" }, method = RequestMethod.POST)
+	public String updateUser(@RequestParam(value = "id") String id,
+							 @RequestParam(value = "Login1") String login,
+							 @RequestParam(value = "Name2") String name,
+							 @RequestParam(value = "Password3") String password,
+							 @RequestParam(value = "Role4") Set<Role> roles) {
+		if (roles.size() == 0) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		} else if (password.equals("")) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		} else if (login.equals("")) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		} else if (name.equals("")) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		}
+		Set<Role> roleSet = new HashSet<>();
+		for (Role role : roles) {
+			try {
+				roleSet.add(roleService.getByRoleName(role.getRoleName()));
+			} catch (NoResultException exp) {
+
+			}
+		}
+		long iD = Long.parseLong(id);
+		User user = new User(iD, name, login, password, roleSet);
+
+		userService.editUser(user);
+		return "redirect:/admin";
+	}  */
 	
 
 
