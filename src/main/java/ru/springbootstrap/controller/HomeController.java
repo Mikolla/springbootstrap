@@ -42,7 +42,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(ModelMap modelMap) {
-	    return "login";
+		return "login";
 	}
 
 
@@ -51,7 +51,7 @@ public class HomeController {
 	public String getIndex(Model model){
 		List<User> users = userService.getAllUsers();
 		model.addAttribute("users", users);
-        model.addAttribute("name", "TEST");
+		model.addAttribute("name", "TEST");
 		return "index";
 	}
 
@@ -69,9 +69,9 @@ public class HomeController {
 
 	@RequestMapping(value="/admin/adduser", method= RequestMethod.POST)
 	public String saveUser     (@RequestParam(value = "name") String name,
-							  @RequestParam(value = "login") String login,
-							  @RequestParam(value = "password") String password,
-							  @RequestParam(value = "role") Set<Role> roles) throws UsernameNotFoundException {
+								@RequestParam(value = "login") String login,
+								@RequestParam(value = "password") String password,
+								@RequestParam(value = "role") Set<Role> roles) throws UsernameNotFoundException {
 		if (roles.size() == 0) {
 			return "redirect:/admin/allusers?error";
 		} else if (password.equals("")) {
@@ -97,7 +97,7 @@ public class HomeController {
 
 
 	@RequestMapping(value="/admin/deluser/{id}", method = RequestMethod.GET)
-		public String delUser(@PathVariable("id") long id, Model model){
+	public String delUser(@PathVariable("id") long id, Model model){
 		long userIdToDel = id;
 		userService.deleteUser(userIdToDel);
 		List<User> users = userService.getAllUsers();
@@ -123,7 +123,7 @@ public class HomeController {
 
 
 
-
+/*
 	@RequestMapping(value = { "/admin/edit" }, method = RequestMethod.POST)
 	public String updateUser(@RequestParam(value = "id") String id,
 							 @RequestParam(value = "login") String login,
@@ -153,8 +153,39 @@ public class HomeController {
 		userService.editUser(user);
 		return "redirect:/admin";
 	}
+*/
 
-	
+
+	@RequestMapping(value = { "/admin/edit" }, method = RequestMethod.POST)
+	public String updateUser(@RequestParam(value = "id0") String id,
+							 @RequestParam(value = "Login1") String login,
+							 @RequestParam(value = "Name2") String name,
+							 @RequestParam(value = "Password3") String password,
+							 @RequestParam(value = "Role4") Set<Role> roles) {
+		if (roles.size() == 0) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		} else if (password.equals("")) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		} else if (login.equals("")) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		} else if (name.equals("")) {
+			return "redirect:/admin/edit/" + id.toString() + "?error";
+		}
+		Set<Role> roleSet = new HashSet<>();
+		for (Role role : roles) {
+			try {
+				roleSet.add(roleService.getByRoleName(role.getRoleName()));
+			} catch (NoResultException exp) {
+
+			}
+		}
+		long iD = Long.parseLong(id);
+		User user = new User(iD, name, login, password, roleSet);
+
+		userService.editUser(user);
+		return "redirect:/admin";
+	}
+
 
 
 

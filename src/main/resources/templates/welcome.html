@@ -29,103 +29,103 @@
     </div>
     <div class="col-md-10" style="background: #f9f9f9; padding-right: 40px">
         <h1>Admin panel</h1>
-<br/>
+        <br/>
 
 
 
-                    <!-- tabs -->
+        <!-- tabs -->
 
 
 
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#one" data-toggle="tab">Users table</a></li>
-                            <li><a href="#two" data-toggle="tab">New User</a></li>
-                        </ul>
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#one" data-toggle="tab">Users table</a></li>
+            <li><a href="#two" data-toggle="tab">New User</a></li>
+        </ul>
 
 
 
 
-                        <div class="tab-content" style="border-bottom-style: solid; border-left-style: solid; border-right-style: solid; border-radius: 0 0 5px 5px;
+        <div class="tab-content" style="border-bottom-style: solid; border-left-style: solid; border-right-style: solid; border-radius: 0 0 5px 5px;
                                        border-width: 1.5px; border-color: lightgray;">
-                            <div class="tab-pane active" id="one">
-                                <div class="panel-heading" style="background: #f9f9f9;">
-                                    <h4 class="modal-title">All users</h4>
+            <div class="tab-pane active" id="one">
+                <div class="panel-heading" style="background: #f9f9f9;">
+                    <h4 class="modal-title">All users</h4>
+                </div>
+
+                <div class="table" style="padding-left: 15px; padding-right: 15px;">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Login</th>
+                            <th>Name</th>
+
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}">id</td>
+                            <td th:text="${user.login}">name</td>
+                            <td th:text="${user.name}">login</td>
+                            <td th:text="${user.password}">login</td>
+                            <td th:text="${user.getRoles().toArray()[0].getRoleName()}">login</td>
+                            <td>
+                                <!--    <button class="btn btn-success" data-toggle="modal" data-target="#myModal" contenteditable="false">Edit</button>  -->
+                                <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
+                                <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+            </div>
+            <div class="tab-pane" id="two" style="border-radius: 0 0 5px 5px;">
+                <div class="panel-heading" style="background: #f9f9f9;">
+                    <h4 class="modal-title" >Add new user</h4>
+                </div>
+                <div class="container-fluid" style="background: white; border-radius: 0 0 5px 5px;">
+                    <center>
+                        <div class="col-md-4"  style="float:inherit">
+
+                            <form role="form" name="modalForm"  align="center"  action="/admin/add" method="post">
+                                <!--     <form role="form" class="form-inline"  align="center"   action="/admin/edit" method="POST">  -->
+                                <div class="form-group"  style="float:inherit">
+                                    <label for="login" style="margin-top: 5%">login</label>
+                                    <input class="form-control" type="text" name="login" id="login"
+                                           placeholder="login" required="true" autofocus="true"/>
+                                    <label for="name" style="margin-top: 5%">name</label>
+                                    <input class="form-control" type="text" name="name" id="name"
+                                           placeholder="name" required="true" autofocus="true"/>
+                                    <label for="password" style="margin-top: 5%">password</label>
+                                    <input class="form-control" type="text" name="password" id="password"
+                                           placeholder="password" required="true" autofocus="true"/>
+                                    <label for="role1" style="margin-top: 5%">role</label>
+                                    <select class="form-control" name="role" id="role1">
+                                        <option value="User">User</option>
+                                        <option value="Admin">Admin</option>
+                                    </select>
+                                    <input type="submit" value="Add new user" class="btn btn-success" style="margin-top: 20px; margin-bottom: 10px;"></input>
                                 </div>
-
-                                <div class="table" style="padding-left: 15px; padding-right: 15px;">
-                                    <table class="table table-striped">
-                                    <thead>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>Login</th>
-                                        <th>Name</th>
-
-                                        <th>Password</th>
-                                        <th>Role</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr th:each="user : ${users}">
-                                        <td th:text="${user.id}">id</td>
-                                        <td th:text="${user.login}">name</td>
-                                        <td th:text="${user.name}">login</td>
-                                        <td th:text="${user.password}">login</td>
-                                        <td th:text="${user.getRoles().toArray()[0].getRoleName()}">login</td>
-                                        <td>
-                                        <!--    <button class="btn btn-success" data-toggle="modal" data-target="#myModal" contenteditable="false">Edit</button>  -->
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
-                                            <a th:href="'/admin/delete/' + ${user.id}"><button type="button" class="btn btn-primary">Delete</button></a>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-
-
-
-
-
-
-                                </div>
-
-
-
-
-
-                            </div>
-                            <div class="tab-pane" id="two" style="border-radius: 0 0 5px 5px;">
-                                <div class="panel-heading" style="background: #f9f9f9;">
-                                    <h4 class="modal-title" >Add new user</h4>
-                                </div>
-                                <div class="container-fluid" style="background: white; border-radius: 0 0 5px 5px;">
-                                    <center>
-                                    <div class="col-md-4"  style="float:inherit">
-
-                                        <form role="form" name="modalForm"  align="center"  action="/admin/add" method="post">
-                                   <!--     <form role="form" class="form-inline"  align="center"   action="/admin/edit" method="POST">  -->
-                                            <div class="form-group"  style="float:inherit">
-                                                <label for="login" style="margin-top: 5%">login</label>
-                                                <input class="form-control" type="text" name="login" id="login"
-                                                       placeholder="login" required="true" autofocus="true"/>
-                                                <label for="name" style="margin-top: 5%">name</label>
-                                                <input class="form-control" type="text" name="name" id="name"
-                                                       placeholder="name" required="true" autofocus="true"/>
-                                                <label for="password" style="margin-top: 5%">password</label>
-                                                <input class="form-control" type="text" name="password" id="password"
-                                                       placeholder="password" required="true" autofocus="true"/>
-                                                <label for="role1" style="margin-top: 5%">role</label>
-                                                <select class="form-control" name="role" id="role1">
-                                                    <option value="User">User</option>
-                                                    <option value="Admin">Admin</option>
-                                                </select>
-                                                <input type="submit" value="Add new user" class="btn btn-success" style="margin-top: 20px; margin-bottom: 10px;"></input>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    </center>
-                                </div>
-                            </div>
-                            </div>
+                            </form>
+                        </div>
+                    </center>
+                </div>
+            </div>
+        </div>
 
 
 
@@ -156,7 +156,7 @@
 
 
 
-
+<!--
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -193,6 +193,52 @@
         </div>
     </div>
 </div>
+
+-->
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <p>'od100 modal content'</p>
+        </div>
+    </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
+
+                </button>
+                <h4 class="modal-title" id="myModalLabel">User edit</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <center>
+
+                        <div class="1234 col-md-6"  style="float:inherit">
+                        </div>
+
+                    </center>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!--
 
 <script>
     $(".btn[data-target='#myModal']").click(function() {
@@ -258,6 +304,46 @@
         modalBody.append(modalForm);
 
         $('.1234').html(modalBody);
+
+
+    });
+    $('.modal-footer .btn-primary').click(function() {
+        $('form[name="modalForm"]').submit();
+    });
+</script>
+
+-->
+
+
+<script>
+    $(".btn[data-target='#myModal']").click(function() {
+        var columnHeadings = $("thead th").map(function() {
+            return $(this).text();
+        }).get();
+        columnHeadings.pop();
+        var columnValues = $(this).parent().siblings().map(function() {
+            return $(this).text();
+        }).get();
+        var id100 = columnValues[0];
+        var login100 = columnValues[1];
+        var name100 = columnValues[2];
+        var pasword100 = columnValues[3];
+        var role100 = columnValues[4];
+        console.log('id = ' + id100);
+        console.log('login = ' + login100);
+        console.log('name = ' + name100);
+        console.log('password = ' + pasword100);
+        console.log('role = ' + role100);
+        var modalBody = $('<div id="modalContent"></div>');
+        var modalForm = $('<form role="form" name="modalForm" action="/admin/edit" method="post" ></form>');
+        $.each(columnHeadings, function(i, columnHeader) {
+            var formGroup = $('<div class="form-group"></div>');
+            formGroup.append('<label for="'+columnHeader+'">'+columnHeader+'</label>');
+            formGroup.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
+            modalForm.append(formGroup);
+        });
+        modalBody.append(modalForm);
+        $('.modal-body').html(modalBody);
 
 
     });
