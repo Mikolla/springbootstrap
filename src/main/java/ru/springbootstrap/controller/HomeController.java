@@ -125,7 +125,7 @@ public class HomeController {
 
 
 	@RequestMapping(value = { "/admin/edit" }, method = RequestMethod.POST)
-	public String updateUser(@RequestParam(value = "id") String id,
+	public String updateUser(@RequestParam(value = "id") Long id,
 							 @RequestParam(value = "login") String login,
 							 @RequestParam(value = "name") String name,
 							 @RequestParam(value = "password") String password,
@@ -147,9 +147,7 @@ public class HomeController {
 
 			}
 		}
-		long iD = Long.parseLong(id);
-		User user = new User(iD, name, login, password, roleSet);
-
+		User user = new User(id, name, login, password, roleSet);
 		userService.editUser(user);
 		return "redirect:/admin";
 	}
