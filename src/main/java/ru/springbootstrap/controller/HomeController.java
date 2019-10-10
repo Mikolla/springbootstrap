@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.springbootstrap.model.Role;
+import ru.springbootstrap.model.Task;
 import ru.springbootstrap.model.User;
+import ru.springbootstrap.service.abstraction.TaskService;
 import ru.springbootstrap.service.abstraction.role.RoleService;
 import ru.springbootstrap.service.abstraction.user.UserService;
 
@@ -30,6 +32,8 @@ public class HomeController {
 	private UserService userService;
 	@Autowired
 	private RoleService roleService;
+	@Autowired
+	private TaskService taskService;
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public String getWelcome(ModelMap modelMap) {
@@ -50,6 +54,19 @@ public class HomeController {
 	@RequestMapping("/test")
 	public String getIndex(Model model){
 		List<User> users = userService.getAllUsers();
+		taskService.getTaskById(1L).setDone(false);
+		taskService.saveTask(new Task("test1task"));
+		taskService.saveTask(new Task("test2task"));
+		taskService.saveTask(new Task("test3task"));
+
+		User user = userService.getUserById(1L);
+		List<Task> tasks = user.getTasks();
+		Task newTestTask = new Task("task for first user");
+		taskService.saveTask(newTestTask);
+		tasks.add(newTestTask);
+		user.setTasks(tasks);
+		taskService.saveTask(newTestTask);
+		List<Task> tasksList = user.getTasks();
 		model.addAttribute("users", users);
         model.addAttribute("name", "TEST");
 		return "index";
@@ -188,7 +205,10 @@ public class HomeController {
 
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userPage(ModelMap modelMap) {
+		User user = userService.getUserByLogin(getPrincipal());
 		modelMap.addAttribute("user", getPrincipal());
+		List<Task> tasks = user.getTasks();
+		modelMap.addAttribute("tasks", tasks);
 		return "user";
 	}
 

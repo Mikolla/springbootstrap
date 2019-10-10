@@ -1,11 +1,15 @@
 package ru.springbootstrap.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -30,6 +34,14 @@ public class User implements UserDetails {
     @JoinTable(name = "users_roles_ids", joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
+
+    @JsonIgnore
+    @OneToMany
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(name = "user_tasks",
+            joinColumns = {@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER"))},
+            inverseJoinColumns = {@JoinColumn(name = "task_id", foreignKey = @ForeignKey(name = "FK_TASK"))})
+    private List<Task> tasks;
 
     public User() {
     }
@@ -130,6 +142,14 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     @Override
