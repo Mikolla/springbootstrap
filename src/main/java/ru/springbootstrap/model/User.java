@@ -1,16 +1,14 @@
 package ru.springbootstrap.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.*;
 
 
 @Entity
@@ -18,7 +16,7 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "Name", length = 20, nullable = false)
@@ -36,12 +34,11 @@ public class User implements UserDetails {
     private Set<Role> roles = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(name = "user_tasks",
-            joinColumns = {@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_USER"))},
-            inverseJoinColumns = {@JoinColumn(name = "task_id", foreignKey = @ForeignKey(name = "FK_TASK"))})
-    private List<Task> tasks;
+    @OneToMany(cascade=CascadeType.REMOVE, fetch=FetchType.LAZY, targetEntity = Task.class)
+    @JoinTable(name = "users_tasks",  joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "task_id")})
+
+    private List<Task> tasks = new ArrayList<>();
 
     public User() {
     }

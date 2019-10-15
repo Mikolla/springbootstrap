@@ -54,7 +54,7 @@ public class HomeController {
 	@RequestMapping("/test")
 	public String getIndex(Model model){
 		List<User> users = userService.getAllUsers();
-		taskService.getTaskById(1L).setDone(false);
+		//taskService.getTaskById(1L).setDone(false);
 		taskService.saveTask(new Task("test1task"));
 		taskService.saveTask(new Task("test2task"));
 		taskService.saveTask(new Task("test3task"));
@@ -67,6 +67,11 @@ public class HomeController {
 		user.setTasks(tasks);
 		taskService.saveTask(newTestTask);
 		List<Task> tasksList = user.getTasks();
+
+        Task task = new Task("new task for test");
+        userService.addUserTask(2, task);
+        taskService.saveTask(task);
+
 		model.addAttribute("users", users);
         model.addAttribute("name", "TEST");
 		return "index";
@@ -206,7 +211,7 @@ public class HomeController {
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String userPage(ModelMap modelMap) {
 		User user = userService.getUserByLogin(getPrincipal());
-		modelMap.addAttribute("user", getPrincipal());
+		modelMap.addAttribute("user", user);
 		List<Task> tasks = user.getTasks();
 		modelMap.addAttribute("tasks", tasks);
 		return "user";

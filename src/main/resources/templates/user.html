@@ -6,6 +6,7 @@
     <title>Spring Security Example </title>
     <div th:replace="fragments/header :: header-css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="../../js/tasktablefill.js"></script>
 </head>
 <body>
 
@@ -30,6 +31,8 @@
     <div class="col-md-10" style="background: #f9f9f9; padding-right: 40px; min-height: 85vh;">
                 <h1>User page</h1>
                 <p th:text="'Hello, ' + ${user} + '!'" />
+                <p th:text="'Hello, ' + ${user.id} + '!'" />
+                <span id="userIdForTask" th:text="${user.id}" />
 
 
 

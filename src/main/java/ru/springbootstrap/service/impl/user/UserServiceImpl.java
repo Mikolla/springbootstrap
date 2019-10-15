@@ -3,6 +3,7 @@ package ru.springbootstrap.service.impl.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.springbootstrap.dao.abstraction.user.UserDao;
+import ru.springbootstrap.model.Task;
 import ru.springbootstrap.model.User;
 import ru.springbootstrap.service.abstraction.user.UserService;
 
@@ -53,5 +54,15 @@ public class UserServiceImpl implements UserService{
         userDao.deleteUser(id);
     }
 
+    @Override
+    public List<Task> getTasksByUserId(long id) {
+        return userDao.getUserById(id).getTasks();
+    }
 
+    @Override
+    public void addUserTask(long id, Task task) {
+        User user = userDao.getUserById(id);
+        List<Task> tasks = user.getTasks();
+        tasks.add(task);
+    }
 }
