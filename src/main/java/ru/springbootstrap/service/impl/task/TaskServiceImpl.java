@@ -45,4 +45,9 @@ public class TaskServiceImpl implements TaskService {
     public List<Task> getTasksByUserId(Long id) {
         return taskDao.getTasksByUserId(id);
     }
+
+    @Override
+    public void flush() {
+        taskDao.flush();
+    }
 }

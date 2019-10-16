@@ -16,4 +16,6 @@ public interface TaskService {
     List<Task> getAllTasks();
 
     List<Task> getTasksByUserId(Long id);
+
+    void flush();
 }

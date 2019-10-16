@@ -16,4 +16,6 @@ public interface TaskDao /*extends TaskRepository*/ {
     List<Task> getAllTasks();
 
     List<Task> getTasksByUserId(Long id);
+
+    void flush();
 }

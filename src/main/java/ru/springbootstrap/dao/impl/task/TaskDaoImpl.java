@@ -47,4 +47,9 @@ public class TaskDaoImpl implements TaskDao {
     public List<Task> getTasksByUserId(Long id) {
         return null;
     }
+
+    @Override
+    public void flush() {
+        em.flush();
+    }
 }
