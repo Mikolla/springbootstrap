@@ -55,11 +55,12 @@ public class HomeController {
 	public String getIndex(Model model){
 		List<User> users = userService.getAllUsers();
 		//taskService.getTaskById(1L).setDone(false);
-		taskService.saveTask(new Task("test1task"));
-		taskService.saveTask(new Task("test2task"));
-		taskService.saveTask(new Task("test3task"));
+		taskService.saveTask(new Task("test1task!"));
+		taskService.saveTask(new Task("test2task!"));
+		taskService.saveTask(new Task("test3task!"));
+		taskService.saveTask(new Task("test4task!"));
 
-		User user = userService.getUserById(1L);
+	/*	User user = userService.getUserById(1L);
 		List<Task> tasks = user.getTasks();
 		Task newTestTask = new Task("task for first user");
 		taskService.saveTask(newTestTask);
@@ -70,7 +71,7 @@ public class HomeController {
 
         Task task = new Task("new task for test");
         userService.addUserTask(2, task);
-        taskService.saveTask(task);
+        taskService.saveTask(task); */
 
 		model.addAttribute("users", users);
         model.addAttribute("name", "TEST");

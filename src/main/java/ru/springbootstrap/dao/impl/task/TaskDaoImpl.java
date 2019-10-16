@@ -1,5 +1,7 @@
 package ru.springbootstrap.dao.impl.task;
 
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class TaskDaoImpl implements TaskDao {
     @PersistenceContext
     private EntityManager em;
