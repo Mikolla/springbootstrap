@@ -6,27 +6,26 @@ $(document).ready(function() {
     $.ajax({
         url: "http://localhost:8080/rest/usertasks/" + userIdForTask
     }).then(function(data) {
-        var userList = data;
-        console.log(userList);
+        var userTaskList = data;
+        console.log(userTaskList);
 
 
 
 
-        for(var i = 0; i < userList.length; i++) {
-            var role = userList[i].roles[0];
-            console.log(userList[i].id + ' ' + userList[i].login + ' ' + userList[i].name + ' ' + userList[i].password + ' ' + role.roleName + '\r\n');
+        for(var i = 0; i < userTaskList.length; i++) {
 
-            $('#listrole').append(
+            console.log(userTaskList[i].id + ' ' + userTaskList[i].taskName + ' ' + userTaskList[i].isDone + ' '  + '\r\n');
+
+            $('#taskTable').append(
                 '<tr>' +
-                '<td>' + userList[i].id + '</td>' +
-                '<td>' + userList[i].login + '</td>' +
-                '<td>' + userList[i].name + '</td>' +
-                '<td>' + userList[i].password + '</td>' +
-                '<td>' + role.roleName + '</td>' +
+                '<td>' + userTaskList[i].id + '</td>' +
+                '<td>' + userTaskList[i].taskName + '</td>' +
+                '<td>' + userTaskList[i].done + '</td>' +
+
                 '<td>' +
                         '<button class="btn btn-success" id="edButton" data-toggle="modal" data-target="#myModal">Edit</button>' +
                         ' ' +
-                        '<button type="button" class="btn btn-primary" id="delButton">Delete</button>'
+                        '<button type="button" class="btn btn-primary" id="delTaskButton">Delete</button>'
                 + '</td>'
                 + '</tr>'
             );

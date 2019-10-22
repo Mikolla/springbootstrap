@@ -7,6 +7,7 @@
     <div th:replace="fragments/header :: header-css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="../../js/tasktablefill.js"></script>
+    <script src="../../js/delTaskButton.js"></script>
 </head>
 <body>
 
@@ -51,7 +52,7 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="taskTable">
                 <tr th:each="task : ${tasks}">
                     <td th:text="${task.id}">id</td>
                     <td th:text="${task.taskName}">name</td>
