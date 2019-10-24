@@ -12,28 +12,41 @@ $(document).on("click", '#editTaskButton', function() {
     var columnValues = $(this).parent().siblings().map(function() {
         return $(this).text();
     }).get();
-    var id100 = columnValues[0];
-    var login100 = columnValues[1];
-    var name100 = columnValues[2];
+    var taskId = columnValues[0];
+    var taskTitle = columnValues[1];
+    var renderState = columnValues[2];
 
-    console.log('id to del = ' + id100);
-    console.log('login to del = ' + login100);
-    console.log('name to del = ' + name100);
+    console.log('id to del = ' + taskId);
+    console.log('login to del = ' + taskTitle);
+    console.log('name to del = ' + renderState);
 
 
-    jQuery.ajax({
-        url: 'http://localhost:8080/rest/usertasks/del1/' + id100,
-        type: 'GET',
-        success: function(data) {
-            console.log('removed user id was - ' + id100);
 
-            $tr.find('td').fadeOut(1000,function(){
-                $tr.remove();
-            });
+    /* modal form block */
 
-        }
 
-    });
+    var modalBody = $('<div id="modalContent"></div>');
+    var modalForm = $('<form id="formoid" role="form" name="modalForm" action="/adminrest" method="POST" ></form>');
+
+
+    var idForm = $('<div class="form-group"></div>');
+
+
+
+
+
+    modalForm.append(idForm);
+
+    modalBody.append(modalForm);
+
+    $('.1234').html(modalBody);
+
+
+    /* modal form block */
+
+
+
+
 
 
 });
