@@ -17,54 +17,6 @@
 
 
 
-<!-- modal -->
-
-
-<div class="tab-pane" id="two" style="border-radius: 0 0 5px 5px;">
-    <div class="panel-heading" style="background: #f9f9f9;">
-        <h4 class="modal-title" >Add new user</h4>
-    </div>
-    <div class="container-fluid" style="background: white; border-radius: 0 0 5px 5px;">
-        <center>
-            <div class="col-md-4"  style="float:inherit">
-
-                <form role="form" id="adduserForm" name="modalFormAdd"  align="center"  action="/adminrest" method="POST">
-                    <!--     <form role="form" class="form-inline"  align="center"   action="/admin/edit" method="POST">  -->
-                    <div class="form-group"  style="float:inherit">
-                        <label for="login" style="margin-top: 5%">login</label>
-                        <input class="form-control" type="text" name="login" id="login"
-                               placeholder="login" required="true" autofocus="true"/>
-                        <label for="name" style="margin-top: 5%">name</label>
-                        <input class="form-control" type="text" name="name" id="name"
-                               placeholder="name" required="true" autofocus="true"/>
-                        <label for="password" style="margin-top: 5%">password</label>
-                        <input class="form-control" type="text" name="password" id="password"
-                               placeholder="password" required="true" autofocus="true"/>
-                        <label for="role1" style="margin-top: 5%">role</label>
-                        <select class="form-control" name="role" id="role1">
-                            <option value="User">User</option>
-                            <option value="Admin">Admin</option>
-                        </select>
-                        <!--   <input type="submit" id="addnewuserButton" value="Add new user" class="btn btn-success" style="margin-top: 20px; margin-bottom: 10px;"></input> -->
-                        <button type="button" id="addnewuserButton" class="btn btn-success" style="margin-top: 20px; margin-bottom: 10px;">Add new user</button>
-                    </div>
-                </form>
-            </div>
-        </center>
-    </div>
-</div>
-
-
-<!-- modal -->
-
-
-
-
-
-
-
-
-
 
 
 <div class="row">
@@ -133,7 +85,7 @@
                 <button type="button" class="close" data-dismiss="modal"> <span aria-hidden="true" class="">×   </span><span class="sr-only">Close</span>
 
                 </button>
-                <h4 class="modal-title" id="myModalLabel">User edit</h4>
+                <h4 class="modal-title" id="myModalLabel">Task edit</h4>
 
             </div>
             <div class="modal-body">
@@ -148,7 +100,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveUserButton">Save changes</button>
+                <button type="button" class="btn btn-primary" id="saveTaskButton">Save changes</button>
             </div>
         </div>
     </div>
