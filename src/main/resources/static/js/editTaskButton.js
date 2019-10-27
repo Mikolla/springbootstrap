@@ -82,14 +82,68 @@ $(document).on("click", '#saveTaskButton', function() {
     var queryString = $('#formoid').serialize();
     console.log(queryString);
 
+var  taskId = formData.get('id');
 
     let wrap = {
         taskId: formData.get('id'),
         taskTitle: formData.get('title'),
         taskState: formData.get('taskState')
     };
-    let data = JSON.stringify(wrap);
+    let jsondata = JSON.stringify(wrap);
 
+    jsondata = '{"taskId":"45","taskTitle":"new task for test","taskState":"false"}';
+    console.log(jsondata);
+
+    $.ajax({
+        type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+        dataType: "json", // Set datatype - affects Accept header
+        contentType: "application/json; charset=utf-8",
+        url: "http://localhost:8080/rest/usertasks/edit?taskId=" + taskId, // A valid URL
+        data: jsondata, // Some data e.g. Valid JSON as a string
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+    }).then(function(data) {
+
+        console.log("Ajax Works");
+        $('form[name="modalForm"]').submit();
+    });
+
+
+    $.ajax({
+        type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
+        dataType: "json", // Set datatype - affects Accept header
+        contentType: "application/json; charset=utf-8",
+        url: "http://localhost:8080/rest/usertasks/edit", // A valid URL
+        data: jsondata, // Some data e.g. Valid JSON as a string
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+    }).then(function(data) {
+        console.log("Ajax Works");
+        $('form[name="modalForm"]').submit();
+    });
+
+    jQuery.ajax({
+        type: "POST",
+        url: "http://localhost:8080/rest/usertasks/edit",
+        contentType: "application/json; charset=utf-8",
+        data: jsondata,
+        success: function(data) {
+            console.log('WORKED!!!');
+
+
+
+        },
+        error: function (e) {
+            console.log("ERROR")
+        }
+
+    });
 
 
 
