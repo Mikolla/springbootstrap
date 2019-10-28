@@ -48,19 +48,31 @@ public class TaskRestController {
         return ResponseEntity.ok(HttpStatus.OK);
     }*/
 
-    @RequestMapping(value = { "rest/usertasks/edit" }, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
+ /*   @RequestMapping(value = { "rest/usertasks/edit" }, method = RequestMethod.POST)
     public ResponseEntity editTask1(@RequestParam(value = "taskId", required = false) String taskId,
-                                    @RequestParam(value = "taskName", required = false) String taskName,
+                                    //@RequestParam(value = "taskName", required = false) String taskName,
                                           @RequestBody Map<String,Object> params
     ) {
 
         return ResponseEntity.ok(HttpStatus.OK);
-    }
+    } */
 
     @GetMapping(value = "rest/usertasks/del/{taskId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity delTasksById(@PathVariable Long taskId) {
         taskService.deleteTask(taskId);
         return ResponseEntity.ok(HttpStatus.OK);
     }
+
+
+    @PostMapping(value = "rest/usertasks/edit")
+    public ResponseEntity eTask(@RequestParam(value = "taskId", required = false) Long taskId,
+                                         @RequestParam(value = "taskName", required = false) String taskName,
+                                         @RequestParam(value = "taskState", required = false) Boolean taskState
+                                        // @RequestBody Map<String,Object> params
+    ) {
+        System.out.println("ID  = " + taskId);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+
 }

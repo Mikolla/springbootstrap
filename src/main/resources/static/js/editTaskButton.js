@@ -78,6 +78,7 @@ $(document).on("click", '#saveTaskButton', function() {
 
     var myform = document.getElementById("formoid");
     var formData = new FormData(myform);
+    var data =  $('#formoid').serialize();
 
     var queryString = $('#formoid').serialize();
     console.log(queryString);
@@ -86,7 +87,7 @@ var  taskId = formData.get('id');
 
     let wrap = {
         taskId: formData.get('id'),
-        taskTitle: formData.get('title'),
+        taskName: formData.get('title'),
         taskState: formData.get('taskState')
     };
     let jsondata = JSON.stringify(wrap);
@@ -94,25 +95,52 @@ var  taskId = formData.get('id');
     jsondata = '{"taskId":"45","taskTitle":"new task for test","taskState":"false"}';
     console.log(jsondata);
 
+
+var b = true;
+
+
+    let
+        url = 'http://localhost:8080/rest/usertasks/edit',
+        formData1 = {
+            taskId: formData.get('id'),
+            taskName: formData.get('title'),
+            taskState: formData.get('taskState')
+        };
     $.ajax({
+        type: 'POST',
+        url: url,
+        data: formData1,
+        success: function () {
+            console.log('WORKED!!!');
+        },
+        error: function (error) {
+            console.log(error.responseText);
+        }
+    });
+
+
+
+
+
+  /*  $.ajax({
         type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
-        dataType: "json", // Set datatype - affects Accept header
-        contentType: "application/json; charset=utf-8",
-        url: "http://localhost:8080/rest/usertasks/edit?taskId=" + taskId, // A valid URL
-        data: jsondata, // Some data e.g. Valid JSON as a string
+      //  dataType: "json", // Set datatype - affects Accept header
+      //  contentType: "application/json; charset=utf-8",
+        url: "http://localhost:8080/rest/usertasks/edit", // A valid URL
+        data: formData, // Some data e.g. Valid JSON as a string
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Accept': 'form-data',
+            'Content-Type': 'application/json; charset=utf-8'
         }
 
     }).then(function(data) {
 
         console.log("Ajax Works");
-        $('form[name="modalForm"]').submit();
-    });
+     //   $('form[name="modalForm"]').submit();
+    }); */
 
 
-    $.ajax({
+  /*  $.ajax({
         type: 'POST', // Use POST with X-HTTP-Method-Override or a straight PUT if appropriate.
         dataType: "json", // Set datatype - affects Accept header
         contentType: "application/json; charset=utf-8",
@@ -143,7 +171,7 @@ var  taskId = formData.get('id');
             console.log("ERROR")
         }
 
-    });
+    }); */
 
 
 
