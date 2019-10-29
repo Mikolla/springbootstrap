@@ -83,25 +83,9 @@ $(document).on("click", '#saveTaskButton', function() {
     var queryString = $('#formoid').serialize();
     console.log(queryString);
 
-var  taskId = formData.get('id');
-
-    let wrap = {
-        taskId: formData.get('id'),
-        taskName: formData.get('title'),
-        taskState: formData.get('taskState')
-    };
-    let jsondata = JSON.stringify(wrap);
-
-    jsondata = '{"taskId":"45","taskTitle":"new task for test","taskState":"false"}';
-    console.log(jsondata);
-
-
-var b = true;
-
-
     let
         url = 'http://localhost:8080/rest/usertasks/edit',
-        formData1 = {
+        taskData = {
             taskId: formData.get('id'),
             taskName: formData.get('title'),
             taskState: formData.get('taskState')
@@ -109,7 +93,7 @@ var b = true;
     $.ajax({
         type: 'POST',
         url: url,
-        data: formData1,
+        data: taskData,
         success: function () {
             console.log('WORKED!!!');
         },

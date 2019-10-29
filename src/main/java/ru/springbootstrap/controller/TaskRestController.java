@@ -70,7 +70,10 @@ public class TaskRestController {
                                          @RequestParam(value = "taskState", required = false) Boolean taskState
                                         // @RequestBody Map<String,Object> params
     ) {
-        System.out.println("ID  = " + taskId);
+        Task task = taskService.getTaskById(taskId);
+        task.setTaskName(taskName);
+        task.setDone(taskState);
+        taskService.editTask(task);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
