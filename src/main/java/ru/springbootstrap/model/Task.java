@@ -1,19 +1,11 @@
 package ru.springbootstrap.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import ru.springbootstrap.dao.TaskDoer;
-import ru.springbootstrap.dao.TaskListener;
-import ru.springbootstrap.dao.TaskRun;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "Tasks")
-@EntityListeners(TaskRun.class)
 public class Task {
     @Id
     @Column(name = "ID")

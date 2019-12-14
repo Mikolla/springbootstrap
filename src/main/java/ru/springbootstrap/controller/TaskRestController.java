@@ -11,7 +11,6 @@ import ru.springbootstrap.service.abstraction.role.RoleService;
 import ru.springbootstrap.service.abstraction.user.UserService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class TaskRestController {
@@ -29,12 +28,12 @@ public class TaskRestController {
     }
 
     @PostMapping(value = "rest/usertasks/addtask")
-    public ResponseEntity addTaskByUserId(@RequestParam Long userId,
-                                      @RequestParam String taskName) {
+    public ResponseEntity<Task> addTaskByUserId(@RequestParam Long userId,
+                                          @RequestParam(value = "taskName", required = true) String taskName) {
         Task task = new Task(taskName);
         userService.addUserTask(userId, task);
         taskService.saveTask(task);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok(task);
     }
 
   /*  @PostMapping(value = "rest/usertasks/edit")

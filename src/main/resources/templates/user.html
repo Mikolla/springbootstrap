@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+>
 <head>
     <title>Spring Security Example </title>
     <div th:replace="fragments/header :: header-css"/>
@@ -9,6 +9,7 @@
     <script src="../../js/tasktablefill.js"></script>
     <script src="../../js/delTaskButton.js"></script>
     <script src="../../js/editTaskButton.js"></script>
+    <script src="../../js/addTaskButton.js"></script>
 </head>
 <body>
 
@@ -31,12 +32,12 @@
     <div class="col-md-10" style="background: #f9f9f9; padding-right: 40px; min-height: 85vh;">
                 <h1>User page</h1>
                 <p th:text="'Hello, ' + ${user} + '!'" />
-                <p th:text="'Hello, ' + ${user.id} + '!'" />
-                <span id="userIdForTask" th:text="${user.id}" />
+                <p th:text="'Hello, user Id =' + ${user.id} + '!'" />
+                <span id="userIdForTask" th:text="${user.id}" /> <!-- here we place user Id to take tasks by userId -->
 
 
 
-
+        <div id="placeToInsertButton"></div>
         <div class="panel-heading" style="background: #f9f9f9;">
             <h4 class="modal-title">User tasks</h4>
         </div>
@@ -98,7 +99,7 @@
                     </center>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" id="buttonPanel">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="saveTaskButton">Save changes</button>
             </div>

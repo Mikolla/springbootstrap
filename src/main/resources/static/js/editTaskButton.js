@@ -1,6 +1,7 @@
 $(document).on("click", '#editTaskButton', function() {
 
     var $tr = $(this).closest('tr');
+    console.log($tr);
     console.log('form filler script');
     // Get array of column Headings
     var columnHeadings = $("thead th").map(function() {
@@ -90,15 +91,41 @@ $(document).on("click", '#saveTaskButton', function() {
             taskName: formData.get('title'),
             taskState: formData.get('taskState')
         };
+
+    var taskTable = document.getElementById("taskTable");
+    var trs = taskTable.getElementsByTagName('tr');
+
+    var rowIndex;
+    var i = 0;
+    while(i < trs.length){
+        var td2 = trs[i].getElementsByTagName('td');
+        var taskIdtoEdit = td2[0].innerHTML;
+        console.log(td2[0].innerHTML);
+        if(taskIdtoEdit == taskData.taskId) {
+            rowIndex = i;
+        }
+        i++;
+    }
+    td2 = trs[rowIndex].getElementsByTagName('td');
+
     $.ajax({
         type: 'POST',
         url: url,
         data: taskData,
+        beforeSend: function(){
+            td2[1].style.color = "darkorange";
+            td2[1].textContent = "Загрузка...";
+        },
         success: function () {
-            console.log('WORKED!!!');
+            console.log('WORKED!!!' + trs);
+            td2[1].innerHTML = taskData.taskName;
+            td2[1].style.color = "darkblue";
+            td2[2].innerHTML = taskData.taskState;
         },
         error: function (error) {
             console.log(error.responseText);
+            td2[1].textContent = "Ошибка сохранения. " + error.responseText;
+            td2[1].style.color = "red";
         }
     });
 
