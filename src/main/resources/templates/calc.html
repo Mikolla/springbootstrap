@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>Spring Security Example </title>
+    <div th:replace="fragments/header :: header-css"/>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="../../js/extablefill.js"></script>
+    <script src="../../js/delExerciseButton.js"></script>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header" style="margin-bottom: 0px"/>
+
+
+
+
+
+
+<div class="row">
+    <div class="col-md-2" style="margin-top: 20px; padding-right: 0px; min-height: 85vh;">
+        <nav class="nav-sidebar  nav-justified">
+            <ul class="nav nav-pills nav-stacked">
+                <li class=""><a href="/admin" style="border-radius: 0;">Admin</a></li>
+                <li class=""><a href="/user"  style="border-radius: 0;">User</a></li>
+                <li class="active"><a href="/calc" >Calc</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-md-10" style="background: #f9f9f9; padding-right: 40px; min-height: 85vh;">
+                <h1>User page</h1>
+                <p th:text="'Hello, ' + ${user} + '!'" />
+                <p th:text="'Hello, user Id =' + ${user.id} + '!'" />
+                <span id="userIdForTask" th:text="${user.id}" /> <!-- here we place user Id to take tasks by userId -->
+
+        <div id="placeToInsertPlayButton"></div>
+        <div class="panel-heading" style="background: #f9f9f9;">
+            <h4 class="modal-title">User exercises</h4>
+        </div>
+
+        <div class="table" style="padding-left: 15px; padding-right: 15px;">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>n1</th>
+                    <th>n2</th>
+                    <th>act</th>
+                    <th>done</th>
+                    <th>time</th>
+                    <th>modify</th>
+                </tr>
+                </thead>
+                <tbody id="exerciseTable">
+                <tr th:each="exercise : ${exercises}">
+                    <td th:text="${exercise.id}">id</td>
+                    <td th:text="${exercise.firstNum}">firstNum</td>
+                    <td th:text="${exercise.secondNum}">secondNum</td>
+                    <td th:text="${exercise.action}">action</td>
+                    <td th:text="${exercise.done}">done</td>
+                    <td th:text="${exercise.processingTime}">processingTime</td>
+                    <td th:text="${exercise.processingTime}">"ghostNgoblins"</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+            </div>
+        </div>
+
+        <!-- tab content -->
+
+<!-- modal -->
+
+
+
+
+
+
+<!-- modal -->
+
+
+
+<br/>
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

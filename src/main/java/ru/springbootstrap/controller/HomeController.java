@@ -6,15 +6,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.springbootstrap.model.Exercise;
 import ru.springbootstrap.model.Role;
 import ru.springbootstrap.model.Task;
 import ru.springbootstrap.model.User;
+import ru.springbootstrap.service.abstraction.ExerciseService;
 import ru.springbootstrap.service.abstraction.TaskService;
 import ru.springbootstrap.service.abstraction.role.RoleService;
 import ru.springbootstrap.service.abstraction.user.UserService;
@@ -34,6 +36,8 @@ public class HomeController {
 	private RoleService roleService;
 	@Autowired
 	private TaskService taskService;
+	@Autowired
+	private ExerciseService exerciseService;
 
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public String getWelcome(ModelMap modelMap) {
@@ -216,6 +220,15 @@ public class HomeController {
 		List<Task> tasks = user.getTasks();
 		modelMap.addAttribute("tasks", tasks);
 		return "user";
+	}
+
+	@RequestMapping(value = "/calc", method = RequestMethod.GET)
+	public String calcPage(ModelMap modelMap) {
+		User user = userService.getUserByLogin(getPrincipal());
+		modelMap.addAttribute("user", user);
+		List<Exercise> exercises = exerciseService.getAll();
+		modelMap.addAttribute("exercises", exercises);
+		return "calc";
 	}
 
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
